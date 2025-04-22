@@ -1,4 +1,4 @@
-const {body} = require('express-validator');
+const {body, validationResult} = require('express-validator');
 
 exports.validateId = (req, res, next)=>{
     let id = req.params.id;
@@ -24,7 +24,7 @@ exports.validateStory = [body('title', 'Title cannot be empty').notEmpty().trim(
 ];
 
 exports.validateResult = (req, res, next) => {
-    let errors = validationResults(req);
+    let errors = validationResult(req);
         if(!errors.isEmpty()){
             errors.array().forEach(error => {
                 req.flash('error', error.msg);
